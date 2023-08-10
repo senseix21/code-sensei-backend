@@ -29,8 +29,14 @@ const connectDB = async () => {
             res.send(result);
         });
 
+        //Get All blogs
+        app.get('/blogs', async (req, res) => {
+            const result = await projectCollection.find({}).toArray();
+            res.send(result);
+        });
+
         //get single project
-        app.get('/projects/:id', async (req, res) => {
+        app.get('/blog/:id', async (req, res) => {
             const id = req.params.id;
             const result = await projectCollection.findOne({ _id: new ObjectId(id) });
             res.send(result);
