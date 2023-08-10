@@ -22,6 +22,7 @@ const connectDB = async () => {
     try {
         const db = client.db('code-sensei')
         const projectCollection = db.collection('projects');
+        const blogsCollection = db.collection('blogs');
 
         //Get All projects
         app.get('/projects', async (req, res) => {
@@ -31,14 +32,14 @@ const connectDB = async () => {
 
         //Get All blogs
         app.get('/blogs', async (req, res) => {
-            const result = await projectCollection.find({}).toArray();
+            const result = await blogsCollection.find({}).toArray();
             res.send(result);
         });
 
         //get single project
         app.get('/blog/:id', async (req, res) => {
             const id = req.params.id;
-            const result = await projectCollection.findOne({ _id: new ObjectId(id) });
+            const result = await blogsCollection.findOne({ _id: new ObjectId(id) });
             res.send(result);
         });
 
